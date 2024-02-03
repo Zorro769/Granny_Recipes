@@ -4,7 +4,7 @@ import { fetchRecipe } from "../utils";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import RecipeCard from "./RecipeCard";
 import Header from "../components/Header";
-import Loading from './Loading'
+import Loading from "./Loading";
 
 const MyRecipes = ({ onClose }) => {
   const axiosPrivate = useAxiosPrivate();
@@ -37,33 +37,32 @@ const MyRecipes = ({ onClose }) => {
   }, []);
   return (
     <div className="w-full">
-  <Header label={"My Recipes"} />
-  {loading ? (
-    <Loading />
-  ) : (
-    <div className="flex-grow overflow-y-auto p-20">
-      {myRecipes?.length > 0 ? (
-        <>
-          <div className="w-full  flex flex-wrap gap-10 px-0 lg:px-10 py-10">
-            {myRecipes?.map((item, index) => (
-              <RecipeCard
-                recipe={item}
-                key={index}
-                favouriteFlag={false}
-                onClose={onClose}
-              />
-            ))}
-          </div>
-        </>
+      <Header label={"My Recipes"} />
+      {loading ? (
+        <Loading />
       ) : (
-        <div className="text-white w-full items-center justify-center py-10">
-          <p className="text-center">No Recipe Found</p>
+        <div className="flex-grow overflow-y-auto p-20">
+          {myRecipes?.length > 0 ? (
+            <>
+              <div className="w-full  flex flex-wrap justify-center gap-10 px-0 lg:px-10 py-10">
+                {myRecipes?.map((item, index) => (
+                  <RecipeCard
+                    recipe={item}
+                    key={index}
+                    favouriteFlag={false}
+                    onClose={onClose}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="text-white w-full items-center justify-center py-10">
+              <p className="text-center">No Recipe Found</p>
+            </div>
+          )}
         </div>
       )}
     </div>
-  )}
-</div>
-
   );
 };
 
